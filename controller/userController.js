@@ -25,22 +25,22 @@ const forSignup = async (req, res) => {
           password: hasshedPassword,
         });
 
-        const welcomeMail = `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; padding: 20px; border-radius: 5px;">
-            <h1 style="text-align:center">Welcome to Our Platform <img src="https://pngdownload.io/wp-content/uploads/2025/04/Arsenal-FC-Logo-Premier-League-Football-Club.webp" width="70px" /></h1>
-            <p>Dear ${firstname} ${lastname},</p>\n\n
-            <p> Welcome to our platform! We're excited to have you on board.\n\n</p>
-            <ol>
-                <li>Explore our features and services.</li>
-                <li>Stay updated with our latest news.</li>
-                <li>Feel free to reach out if you have any questions.</li>
-            </ol>
-            <p>Best regards \n\n</p>
-            <p style="font-weight:bold">Your Company Team</p>
-            <p>Contact us at: <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a></p>
-</div>
-        `;
-        await sendEmail(email, "Welcome to Our Platform", welcomeMail);
+//         const welcomeMail = `
+//         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; padding: 20px; border-radius: 5px;">
+//             <h1 style="text-align:center">Welcome to Our Platform <img src="https://pngdownload.io/wp-content/uploads/2025/04/Arsenal-FC-Logo-Premier-League-Football-Club.webp" width="70px" /></h1>
+//             <p>Dear ${firstname} ${lastname},</p>\n\n
+//             <p> Welcome to our platform! We're excited to have you on board.\n\n</p>
+//             <ol>
+//                 <li>Explore our features and services.</li>
+//                 <li>Stay updated with our latest news.</li>
+//                 <li>Feel free to reach out if you have any questions.</li>
+//             </ol>
+//             <p>Best regards \n\n</p>
+//             <p style="font-weight:bold">Your Company Team</p>
+//             <p>Contact us at: <a href="mailto:${process.env.EMAIL_USER}">${process.env.EMAIL_USER}</a></p>
+// </div>
+//         `;
+//         await sendEmail(email, "Welcome to Our Platform", welcomeMail);
 
         res.status(200).json({ message: "Sign up successfully" });
     } catch (error) {
