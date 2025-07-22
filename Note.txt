@@ -1,0 +1,87 @@
+CRUD operation
+Create =
+Read
+Update
+Delete
+
+HTTP METHOD
+    GET - Read
+    POST - Create 
+    PUT - Update 
+    DELETE - Delete
+    http://localhost:2300/user/login
+
+
+
+
+ // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user
+        const newUser = await User.create({
+            fullname,
+            email,
+            password: hashedPassword,
+        });
+
+        // Send success response
+        res.status(201).json({ message: "Signup successful", user: newUser });
+
+
+ let passwordMatch = await bcrypt.compare(password, existingUser.password);
+        if(!passwordMatch) return res.status(400).json({message:"Invalid password"});
+
+        // Generate JWT token
+        const token = JsonWebTokenError.sign(
+            { id: checkUser._id, role: checkUser.role},
+            process.env.SECRET_KEY,
+            { expiresIn: '3h'}
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            Secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 3 * 60 * 60 * 1000 // 3 hours
+        })
+
+
+
+
+
+
+        const register = async (req, res) => {
+    try {
+        let { fullname, email, password } = req.body;
+
+        // Check if all fields are provided
+        if (!fullname || !email || !password) {
+            return res.status(400).json({ message: "All fields are required!" });
+        }
+
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this email already exists!" });
+        }
+
+        // Generate JWT token
+        const token = JsonWebTokenError.sign(
+            { id: checkUser._id, role: checkUser.role},
+            process.env.SECRET_KEY,
+            { expiresIn: '3h'}
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            Secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 3 * 60 * 60 * 1000 // 3 hours
+        })
+
+       
+    } catch (error) {   
+        console.error("Internal server error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
