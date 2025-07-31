@@ -66,6 +66,19 @@ const edit1Post = async (req, res) => {
     }
 }
 
+const getAllPost = async (req, res) => {
+    const myPost = await Post.find().populate({
+        path: "author",
+        select: "firstname lastname"
+    })
+
+    if (!myPost) {
+        return res.status(404).json({ message: "No posts found"});
+    }
+
+    res.status(200).json(myPost)
+}
+
 
 const deletePost = async (req, res) => {
     try {
@@ -89,5 +102,6 @@ export {
     createPost,
     edit1Post,
     deletePost,
-    get1post
+    get1post,
+    getAllPost
 }
